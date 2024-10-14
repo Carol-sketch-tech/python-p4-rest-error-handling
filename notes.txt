@@ -1,0 +1,48 @@
+ERROR HANDLING IN RESTful APIs.
+
+common issues that we encounter when creating a robust API are:
+    1. Creating records that already exist.
+    2. Creating, retriving updating or deleting resources ehileyour database server is down
+    3. Creating or updating records with invalid attributes
+    4. Retriveing updating or deleting records that dont exist.
+
+
+    HTTP Error Codes.
+status codes 
+    1. 200 - OK means that the request was successful.
+    2. 201 (created) means that he request was successful in creating a new resource.this is the best code 
+    to use after a  POST request.
+    3. 404 (not found) means that he request was unsuccessful because it attempted to access a resource that does not exist on the server
+
+100 - informational theyn informa the client tthat some process is being carries out before a final response is snet
+200 - denote a successful request
+300 - let the client know that a redirect is taking place. this is usually becasue a resource has been moves - you should avoind doing this in RESTful APIs.
+400 - are client erros - they let the client know that they made a mistake.
+500 - are server errors they let the client know that somethind in temporarily out of order on your server.
+
+400 Class Codes - Client errors
+these erroers re intended as response to client errors. these codes can be sent in response to any request method.
+
+despite their error it is strill our ducty as developwers to give the vlient an informative message describing what went wrong.
+the most common 400 errors are 
+    1. 400 (Bad request)- the sercer is unsable or permittes to process the rquest usullat due to 
+    metada in messeges or forms
+    2. 401 (Unauthorized) and 403(Forbidden)- the user has not logged in or has logged in but is not permitted ot access the resource.
+    3. 404 (Not Found) as mentioned above this mean that the resource being sourt after by the cliend  does not exist.
+
+500 Class Codes - server errors
+these errors are acknowledgements that the server has produces an error.
+tis is criticalt impportant to let the cliend know that a 500 class error had occired and whether it s due to regulr maintaincae, a bug or a permanent change.
+
+500 (intern server errror) is by fat the most cmmon 500 class error.
+it can be appropriatly used for more information on 500-class codes.
+
+How to handle errors in Flask
+    one can easilyt set the status code in the construction of response: it is the optional second argument of the make_response() fucntion.
+    when one of these errores take place it is most useful to return a message specific tot he application.
+    these is carried out through registering error handlers.
+
+
+REGISTERING ERROR HANDLERS.
+error handlers are registered through use of the @app.errorhandler() decorator.
+response are constructed the same as with any other view either as comma-seperated body, status code headers or na object created with make_response().
